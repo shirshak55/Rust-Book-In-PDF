@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "strict": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "inlineSourceMap": true,
+        "skipLibCheck": true,
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "outDir": "./dist",
+        "rootDir": "./src",
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "files": [
+        "src/main.ts",
+    ]
+}
