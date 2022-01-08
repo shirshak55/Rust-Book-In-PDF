@@ -31,4 +31,5 @@ jobs:
                   prerelease: true
                   title: "Latest PDF"
                   files: |
+                    LICENCE.txt
                     *.pdf
