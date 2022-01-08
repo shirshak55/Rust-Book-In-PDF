@@ -10,4 +10,7 @@ If you want to support me financially please email me on shirshak55@gmail.com or
 
 ### Thanks,
 
-Shirshak TRPL team
+-   Shirshak
+-   TRPL team
+-   Rustaceans
+-   Contributors
