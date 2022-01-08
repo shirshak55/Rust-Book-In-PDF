@@ -34,5 +34,4 @@ jobs:
                   prerelease: false
                   title: Relase ${{ steps.date.outputs.date }}
                   files: |
-                      LICENCE.txt
                       *.pdf

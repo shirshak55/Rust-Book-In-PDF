@@ -49,7 +49,7 @@ async function main() {
     console.log("Delay for 30 seconds")
     await delay(30 * 1000)
 
-    let dest = path.resolve(`./trlp_${new Date().toDateString().split(" ").join("_")}.pdf`)
+    let dest = path.resolve(`./rust_book_${new Date().toDateString().split(" ").join("_").toLowerCase()}.pdf`)
     await page.pdf({
         path: dest,
         format: "a4",
