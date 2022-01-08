@@ -15,6 +15,9 @@ jobs:
             matrix:
                 node-version: [17.x]
         steps:
+            - name: Get current date
+              id: date
+              run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
             - uses: actions/checkout@v2
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v2
@@ -27,8 +30,8 @@ jobs:
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
                   repo_token: "${{ secrets.GITHUB_TOKEN }}"
-                  automatic_release_tag: "latest"
-                  prerelease: true
+                  automatic_release_tag: release-${{ steps.date.outputs.date }}
+                  prerelease: false
                   title: "Latest PDF"
                   files: |
                       LICENCE.txt
