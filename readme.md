@@ -2,11 +2,8 @@
 
 Better looking pdf in your finger tips.
 
-
-Please find the latest version of pdf in release tab.
-
-
+Please find the latest version of pdf in [release tab](https://github.com/shirshak55/Rust-Book-In-PDF/releases).
 
 ### Thanks,
-Shirshak
-TRPL team
+
+Shirshak TRPL team
