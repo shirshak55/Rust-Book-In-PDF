@@ -25,11 +25,11 @@ jobs:
             - run: npm run start
 
             - uses: "marvinpinto/action-automatic-releases@latest"
-                with:
+              with:
                   repo_token: "${{ secrets.GITHUB_TOKEN }}"
                   automatic_release_tag: "latest"
                   prerelease: true
                   title: "Latest PDF"
                   files: |
-                    LICENCE.txt
-                    *.pdf
+                      LICENSE.txt
+                      *.pdf
