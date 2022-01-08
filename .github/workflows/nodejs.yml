@@ -24,8 +24,11 @@ jobs:
             - run: npm ci
             - run: npm run start
 
-            - uses: actions/checkout@master
-            - name: Bump version and push tag
-              uses: laputansoft/github-tag-action@v4.6
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
+            - uses: "marvinpinto/action-automatic-releases@latest"
+                with:
+                  repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                  automatic_release_tag: "latest"
+                  prerelease: true
+                  title: "Latest PDF"
+                  files: |
+                    *.pdf
