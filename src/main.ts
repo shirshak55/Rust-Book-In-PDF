@@ -61,7 +61,7 @@ async function main() {
             right: 25,
         },
         displayHeaderFooter: true,
-        footerTemplate: `<span style="font-size: 10px"> <span class="pageNumber"></span>/<span class="totalPages"></span></span>`,
+        footerTemplate: `<span style="font-size: 10px; margin-left:auto"> <span class="pageNumber"></span>/<span class="totalPages"></span></span>`,
     })
 
     console.log(`Succesfully printed? ${dest}`)
