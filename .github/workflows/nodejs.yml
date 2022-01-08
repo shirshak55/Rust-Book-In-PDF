@@ -32,7 +32,7 @@ jobs:
                   repo_token: "${{ secrets.GITHUB_TOKEN }}"
                   automatic_release_tag: release-${{ steps.date.outputs.date }}
                   prerelease: false
-                  title: "Latest PDF"
+                  title: Relase ${{ steps.date.outputs.date }}
                   files: |
                       LICENCE.txt
                       *.pdf
