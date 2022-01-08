@@ -24,8 +24,8 @@ jobs:
             - run: npm ci
             - run: npm run start
 
-            - uses: actions/checkout@v2
-            - uses: ncipollo/release-action@v1
+            - uses: actions/checkout@master
+            - name: Bump version and push tag
+              uses: laputansoft/github-tag-action@v4.6
               with:
-                  artifacts: "*.pdf"
-                  token: ${{ secrets.GITHUB_TOKEN }}
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
