@@ -1,0 +1,15 @@
+[Books.The_Rust_Programming_Language]
+print_url="https://doc.rust-lang.org/book/print.html"
+file_name="the_rust_programming_langauge.pdf"
+
+[Books.High_Assurance_Rust]
+print_url="https://highassurance.rs/print.html"
+file_name="high_assurance_rust.pdf"
+
+[Books.Nomicon]
+print_url="https://doc.rust-lang.org/nomicon/print.html"
+file_name="nomicon.pdf"
+
+[Books.Rust_Cookbook]
+print_url="https://rust-lang-nursery.github.io/rust-cookbook/print.html"
+file_name="cookbook.pdf"
