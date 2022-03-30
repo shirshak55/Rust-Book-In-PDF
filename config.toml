@@ -1,35 +1,35 @@
 [Books.The_Rust_Programming_Language]
 print_url="https://doc.rust-lang.org/book/print.html"
-file_name="the_rust_programming_langauge.pdf"
+file_name="the_rust_programming_langauge"
 
 [Books.High_Assurance_Rust]
 print_url="https://highassurance.rs/print.html"
-file_name="high_assurance_rust.pdf"
+file_name="high_assurance_rust"
 
 [Books.Nomicon]
 print_url="https://doc.rust-lang.org/nomicon/print.html"
-file_name="nomicon.pdf"
+file_name="nomicon"
 
 [Books.Rust_Cookbook]
 print_url="https://rust-lang-nursery.github.io/rust-cookbook/print.html"
-file_name="cookbook.pdf"
+file_name="cookbook"
 
 [Books.RustWash]
 print_url="https://rustwasm.github.io/docs/book/print.html"
-file_name="rust_wasm.pdf"
+file_name="rust_wasm"
 
 [Books.EasyRust]
 print_url="https://dhghomon.github.io/easy_rust/print.html"
-file_name="easy_rust.pdf"
+file_name="easy_rust"
 
 [Books.EmbeddedRust]
 print_url="https://docs.rust-embedded.org/book/print.html"
-file_name="embedded_rust_book.pdf"
+file_name="embedded_rust_book"
 
 [Books.RustReference]
 print_url="https://doc.rust-lang.org/reference/print.html"
-file_name="rust_reference.pdf"
+file_name="rust_reference"
 
 [Books.ClI]
 print_url="https://rust-cli.github.io/book/print.html"
-file_name="rust_cli.pdf"
+file_name="rust_cli"
