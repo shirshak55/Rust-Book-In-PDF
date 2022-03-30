@@ -11,7 +11,7 @@ declare const document: any
 async function main() {
     let config = toml.parse(fs.readFileSync("./config.toml").toString())
 
-    let browser = await chromium.launch({ headless: false })
+    let browser = await chromium.launch({ headless: true })
     let context = await browser.newContext()
     let page = await context.newPage()
     await page.addInitScript(() => {
@@ -102,6 +102,7 @@ async function main() {
         let { data: htmlData } = await cdp.send("Page.captureSnapshot", { format: "mhtml" })
         fs.promises.writeFile(path.resolve(`./outputs/${book.file_name}.mhtml`), htmlData)
 
+        // Doesn't work
         let pandocResult = child.execSync(
             `pandoc ./outputs/${book.file_name}.mhtml --to=epub --output=./outputs/${book.file_name}.epub`,
         )
