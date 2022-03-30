@@ -18,11 +18,16 @@ jobs:
             - name: Get current date
               id: date
               run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+            - name: Install pandoc
+              run: sudo apt install -y pandoc
+
             - uses: actions/checkout@v2
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v2
               with:
                   node-version: ${{ matrix.node-version }}
+
             - run: npm install
             - run: npm run start
 
@@ -34,3 +39,5 @@ jobs:
                   title: Relase ${{ steps.date.outputs.date }}
                   files: |
                       *.pdf
+                      *.epub
+                      *.mhtml
