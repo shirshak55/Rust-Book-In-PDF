@@ -1,6 +1,6 @@
 [Books.The_Rust_Programming_Language]
 print_url="https://doc.rust-lang.org/book/print.html"
-file_name="the_rust_programming_langauge.pdf"
+file_name="the_rust_programming_language.pdf"
 
 [Books.High_Assurance_Rust]
 print_url="https://highassurance.rs/print.html"
