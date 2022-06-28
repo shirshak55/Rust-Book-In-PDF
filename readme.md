@@ -6,7 +6,7 @@ Please find the latest version of pdf in [release tab](https://github.com/shirsh
 
 ## Books List
 
--   The Rust Programming Langauge(TRPL). Check nostarch for Physical Book.
+-   The Rust Programming Language (TRPL). Check nostarch for Physical Book.
 -   [High Assurance Rust](https://highassurance.rs/) [Check Author's Github for Physical Book](https://github.com/tnballo/high-assurance-rust#interested-in-a-physical-print)
 -   Nomicon
 -   Rust By Example
