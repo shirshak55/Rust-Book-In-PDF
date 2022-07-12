@@ -33,3 +33,7 @@ file_name="rust_reference.pdf"
 [Books.ClI]
 print_url="https://rust-cli.github.io/book/print.html"
 file_name="rust_cli.pdf"
+
+[Books.RustByExample]
+print_url="https://doc.rust-lang.org/rust-by-example/print.html"
+file_name="rust_by_example.pdf"
