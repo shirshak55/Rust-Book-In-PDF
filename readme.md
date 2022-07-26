@@ -1,6 +1,6 @@
 ## Rust Books PDF
 
-Please find the latest version of the pdf in the release tab. Look at the Assets section and download the pdf from there.
+Please find the latest versions in the (https://github.com/shirshak55/Rust-Book-In-PDF/releases)[release tab]. Searcn and expand the assets section and download the pdfs from there.
 
 ## Books List
 
@@ -8,6 +8,7 @@ Please find the latest version of the pdf in the release tab. Look at the Assets
 -   [High Assurance Rust](https://highassurance.rs/) [Check Author's Github for Physical Book](https://github.com/tnballo/high-assurance-rust#interested-in-a-physical-print)
 -   Nomicon
 -   Rust By Example
+-   And many more...
 
 ### Contributing
 
