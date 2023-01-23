@@ -14,7 +14,7 @@ file_name="nomicon.pdf"
 print_url="https://rust-lang-nursery.github.io/rust-cookbook/print.html"
 file_name="cookbook.pdf"
 
-[Books.RustWash]
+[Books.RustWasm]
 print_url="https://rustwasm.github.io/docs/book/print.html"
 file_name="rust_wasm.pdf"
 
@@ -37,3 +37,24 @@ file_name="rust_cli.pdf"
 [Books.RustByExample]
 print_url="https://doc.rust-lang.org/rust-by-example/print.html"
 file_name="rust_by_example.pdf"
+
+[Books.RustFuzzBook]
+print_url="https://rust-fuzz.github.io/book/print.html"
+file_name="rust_fuzz.pdf"
+
+[Books.RustPerformanceBook]
+print_url="https://nnethercote.github.io/perf-book/print.html"
+file_name="rust_performance.pdf"
+
+[Books.RustDesignPatterns]
+print_url="https://rust-unofficial.github.io/patterns/print.html"
+file_name="rust_design_patterns.pdf"
+
+[Books.LearnWithLinkedList]
+print_url="https://rust-unofficial.github.io/too-many-lists/print.html"
+file_name="rust_linked_list.pdf"
+
+
+[Books.RustPractiseQuestions]
+print_url="https://rust-unofficial.github.io/rust-practise-questions/print.html"
+file_name="rust_practise_questions.pdf"
