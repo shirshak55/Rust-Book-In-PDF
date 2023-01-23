@@ -49,3 +49,12 @@ file_name="rust_performance.pdf"
 [Books.RustDesignPatterns]
 print_url="https://rust-unofficial.github.io/patterns/print.html"
 file_name="rust_design_patterns.pdf"
+
+[Books.LearnWithLinkedList]
+print_url="https://rust-unofficial.github.io/too-many-lists/print.html"
+file_name="rust_linked_list.pdf"
+
+
+[Books.RustPractiseQuestions]
+print_url="https://rust-unofficial.github.io/rust-practise-questions/print.html"
+file_name="rust_practise_questions.pdf"
