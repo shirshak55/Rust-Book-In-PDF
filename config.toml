@@ -58,3 +58,7 @@ file_name="rust_linked_list.pdf"
 [Books.RustPractiseQuestions]
 print_url="https://rust-unofficial.github.io/rust-practise-questions/print.html"
 file_name="rust_practise_questions.pdf"
+
+[Books.The_Rust_DiscoverySTM]
+print_url="https://docs.rust-embedded.org/discovery/f3discovery/print.html"
+file_name="f3discovery.pdf"
