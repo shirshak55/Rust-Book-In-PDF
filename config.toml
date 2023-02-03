@@ -58,3 +58,7 @@ file_name="rust_linked_list.pdf"
 [Books.RustPractiseQuestions]
 print_url="https://rust-unofficial.github.io/rust-practise-questions/print.html"
 file_name="rust_practise_questions.pdf"
+
+[Books.The_Rust_Discovery-microbit]
+print_url="https://docs.rust-embedded.org/discovery/microbit/print.html"
+file_name="microbit_beginner_rust.pdf"

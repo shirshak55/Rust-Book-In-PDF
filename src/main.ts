@@ -72,7 +72,7 @@ async function main() {
             },
         })
 
-        console.log(`Succesfully printed? ${dest}`)
+        console.log(`Successfully printed? ${dest}`)
     }
 
     console.log("Completed")
