@@ -59,6 +59,6 @@ file_name="rust_linked_list.pdf"
 print_url="https://rust-unofficial.github.io/rust-practise-questions/print.html"
 file_name="rust_practise_questions.pdf"
 
-[Books.The_Rust_DiscoverySTM]
-print_url="https://docs.rust-embedded.org/discovery/f3discovery/print.html"
-file_name="rust_embedded_f3discovery.pdf"
+[Books.The_Rust_Discovery-microbit]
+print_url="https://docs.rust-embedded.org/discovery/microbit/print.html"
+file_name="microbit_beginner_rust.pdf"
