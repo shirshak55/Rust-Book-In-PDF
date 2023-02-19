@@ -1,13 +1,6 @@
 ## Rust Books PDF
 
-Please find the latest version of the pdf in the release tab. Look at the Assets section and download the pdf from there.
-
-## Books List
-
--   The Rust Programming Language (TRPL). Check nostarch for a physical book.
--   [High Assurance Rust](https://highassurance.rs/) [Check Author's Github for Physical Book](https://github.com/tnballo/high-assurance-rust#interested-in-a-physical-print)
--   Nomicon
--   Rust By Example
+Please find the latest version of the pdf in the [release tab](https://github.com/shirshak55/Rust-Book-In-PDF/releases/). Look at the Assets section and download the pdf from there.
 
 ### Contributing
 
