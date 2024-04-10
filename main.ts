@@ -15,7 +15,7 @@ async function main() {
     let browser = await chromium.launch({ headless: true })
 
     // concurrency of 5
-    let limit = pLimit(50)
+    let limit = pLimit(10)
     let proms = []
     for (let mode of ["dark", "light"] as const) {
         for (let book_key in config.Books) {
