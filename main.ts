@@ -75,8 +75,12 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
         document.head.appendChild(styleSheet)
     })
 
-    console.log("Delay for 30 seconds")
-    await delay(30 * 1000)
+    if (book.file_name.includes("high_assurance_rust")) {
+        await page.click("#sidebar-toggle")
+    }
+
+    console.log("Delay for 20 seconds")
+    await delay(20 * 1000)
 
 
     let dest = path.resolve(book.file_name.replace(".pdf", `_${mode}.pdf`))
