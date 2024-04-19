@@ -24,6 +24,7 @@ jobs:
             - run: npm install -g yarn
             - run: yarn
             - run: yarn playwright install --with-deps
+            - run: yarn start
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
