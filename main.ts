@@ -12,16 +12,23 @@ let config = toml.parse(fs.readFileSync("./config.toml").toString())
 
 
 async function main() {
+    console.log("Starting", { debugFirstPageOnly: process.env.DEBUG_ONLY_FRIST === "true" })
     let browser = await chromium.launch({ headless: true })
 
     // concurrency of 5
     let limit = pLimit(10)
     let proms = []
-    for (let mode of ["dark", "light"] as const) {
-        for (let book_key in config.Books) {
+
+    for (let book_key in config.Books) {
+        for (let mode of ["dark", "light"] as const) {
             proms.push(limit((...args) => fetchBook(...args), book_key, browser, mode))
         }
+
+        if (process.env.DEBUG_ONLY_FRIST === "true") {
+            break
+        }
     }
+
     await Promise.all(proms)
     console.log("Completed")
     await browser.close()
@@ -83,7 +90,7 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
         const toc = document.createElement('div')
         toc.id = 'table-of-contents'
         toc.innerHTML = '<h2>Table of Contents</h2>'
-
+        toc.style.margin = '40px'
         // Find all headings
         const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6')
         const tocList = document.createElement('ul')
@@ -91,7 +98,7 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
         // Calculate page height (assuming A4 page size)
         const pageHeight = 1122 // A4 height in pixels at 96 DPI
 
-        headings.forEach((heading, index) => {
+        headings.forEach((heading: any, index: any) => {
             const listItem = document.createElement('li')
             const link = document.createElement('a')
 
@@ -106,18 +113,9 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
             const dots = document.createElement('span')
             dots.className = 'dots'
 
-            // Add the page number span
-            const pageNumber = document.createElement('span')
-            pageNumber.className = 'pagenumber_for_toc'
-
-            // Calculate approximate page number
-            const approxPage = Math.floor(heading.getBoundingClientRect().top / pageHeight) + 1
-            pageNumber.textContent = approxPage
-
             // Append elements
             listItem.appendChild(link)
             listItem.appendChild(dots)
-            listItem.appendChild(pageNumber)
             tocList.appendChild(listItem)
 
             // Add an id to the heading
@@ -128,79 +126,25 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
 
         // Insert the table of contents at the beginning of the body
         document.body.insertBefore(toc, document.body.firstChild)
-
-        // Add CSS for both screen and print
-        const style = document.createElement('style')
-        style.textContent = `
-            #table-of-contents ul {
-                list-style-type: none;
-                padding-left: 0;
-            }
-
-            #table-of-contents li {
-                display: flex;
-                align-items: baseline;
-                margin-bottom: 5px;
-            }
-
-            #table-of-contents a {
-                text-decoration: none;
-                color: inherit;
-            }
-
-            .dots {
-                flex-grow: 1;
-                margin: 0 5px;
-                border-bottom: 1px dotted black;
-            }
-
-            .toc-h1 {
-                margin-left: 0;
-            }
-
-            .toc-h2 {
-                margin-left: 15px;
-            }
-
-            .toc-h3 {
-                margin-left: 30px;
-            }
-
-            .toc-h4 {
-                margin-left: 45px;
-            }
-
-            .toc-h5 {
-                margin-left: 60px;
-            }
-
-            .toc-h6 {
-                margin-left: 75px;
-            }
-
-            #table-of-contents {
-                break-after: page;
-            }
-
-            .pagenumber_for_toc::before {
-                content: counter(page);
-            }
-            `
-        document.head.appendChild(style)
     })
 
     if (book.file_name.includes("high_assurance_rust")) {
         await page.click("#sidebar-toggle")
     }
 
-    console.log("Delay for 20 seconds")
-    await delay(20 * 1000)
 
+    if (process.env.DEBUG_ONLY_FRIST === "true") {
+        console.log("Waiting for 5 seconds")
+        await delay(5 * 1000)
+    } else {
+        console.log("Waiting for 20 seconds")
+        await delay(20 * 1000)
+    }
 
     let dest = path.resolve(book.file_name.replace(".pdf", `_${mode}.pdf`))
     await page.pdf({
         path: dest,
-        format: "a4",
+        format: "A4",
         printBackground: true,
         margin: {
             top: 0,
@@ -208,11 +152,15 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
             left: 0,
             right: 0,
         },
+        displayHeaderFooter: true,
+        headerTemplate: `
+            <div style="position: absolute; right: 5px; top: 5px; font-size:15px; color:${mode === "light" ? "black" : "white"}"><span class="pageNumber"></span></div>
+        `,
     })
 
     console.log(`Successfully printed? ${dest}`)
-
 }
+
 main().catch((e) => {
     console.log("Error on main", e)
     process.exit(0)
