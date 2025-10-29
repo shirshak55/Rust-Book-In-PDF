@@ -5,16 +5,16 @@
     "main": "main.ts",
     "license": "MIT",
     "scripts": {
-        "start": "tsx main.ts"
+        "start": "bun run main.ts"
     },
     "dependencies": {
         "meow": "^13.2.0",
         "p-limit": "^6.1.0",
-        "playwright": "1.47.0",
-        "toml": "^3.0.0",
-        "tsx": "^4.19.0"
+        "playwright": "^1.48.2",
+        "toml": "^3.0.0"
     },
     "devDependencies": {
-        "@types/node": "^22.5.4"
+        "@types/node": "^22.8.6",
+        "bun-types": "^1.1.34"
     }
 }
