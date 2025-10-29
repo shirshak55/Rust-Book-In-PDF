@@ -9,22 +9,18 @@ jobs:
     build:
         runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                node-version: [20.x]
         steps:
             - name: Get current date
               id: date
               run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
             - uses: actions/checkout@v2
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v2
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v2
               with:
-                  node-version: ${{ matrix.node-version }}
-            - run: npm install -g yarn
-            - run: yarn
-            - run: yarn playwright install --with-deps
-            - run: yarn start
+                  bun-version: latest
+            - run: bun install
+            - run: bunx playwright install --with-deps
+            - run: bun start
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
@@ -33,4 +29,4 @@ jobs:
                   prerelease: false
                   title: Release ${{ steps.date.outputs.date }}
                   files: |
-                      *.pdf
+                      output/*.pdf

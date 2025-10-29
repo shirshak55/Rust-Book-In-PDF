@@ -10,9 +10,15 @@ declare const document: any
 
 let config = toml.parse(fs.readFileSync("./config.toml").toString())
 
+// Create output directory
+const OUTPUT_DIR = path.resolve("./output")
+if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true })
+}
 
 async function main() {
     console.log("Starting", { debugFirstPageOnly: process.env.DEBUG_ONLY_FRIST === "true" })
+    console.log("Output directory:", OUTPUT_DIR)
     let browser = await chromium.launch({ headless: true })
 
     // concurrency of 5
@@ -43,7 +49,15 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
     console.log("Download from", book_key)
 
     await page.goto(book.print_url)
-    await page.evaluate(() => {
+
+    // Emulate media for dark mode
+    if (mode === "dark") {
+        await page.emulateMedia({ colorScheme: 'dark' })
+    } else {
+        await page.emulateMedia({ colorScheme: 'light' })
+    }
+
+    await page.evaluate((mode: "dark" | "light") => {
         // workaround for working with tsx
         window.__name = () => { }
         let head = document.querySelector("head")
@@ -52,25 +66,25 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
         link.rel = "stylesheet"
         head.appendChild(link)
 
-        let link2 = document.createElement("link2")
-        link2.href = "   https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+        let link2 = document.createElement("link")
+        link2.href = "https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
         link2.rel = "stylesheet"
         head.appendChild(link2)
 
         var styles = `
             html {
-                font-family: Nunito
+                font-family: Nunito;
             }
 
             body{
-                margin: 40px 25px 40ox 25px !important;
+                margin: 40px 25px 40px 25px !important;
             }
 
             pre, code {
                 font-family: 'Fira Code', monospace;
             }
 
-            .fa.fa-copy clip-button {
+            .fa.fa-copy, clip-button {
                 display:none
             }
 
@@ -78,11 +92,76 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
                 page-break-before: always;
             }
 `
+
+        if (mode === "dark") {
+            styles += `
+            * {
+                background-color: #1e1e1e !important;
+                color: #d4d4d4 !important;
+                border-color: #444 !important;
+            }
+            
+            html, body {
+                background-color: #1e1e1e !important;
+                color: #d4d4d4 !important;
+            }
+            
+            a {
+                color: #4a9eff !important;
+            }
+            
+            a:visited {
+                color: #9b6bff !important;
+            }
+            
+            code {
+                background-color: #2d2d2d !important;
+                color: #ce9178 !important;
+            }
+            
+            pre {
+                background-color: #2d2d2d !important;
+                border: 1px solid #444 !important;
+            }
+            
+            pre code {
+                color: #d4d4d4 !important;
+            }
+            
+            table {
+                background-color: #252526 !important;
+            }
+            
+            th {
+                background-color: #2d2d2d !important;
+                color: #d4d4d4 !important;
+            }
+            
+            td {
+                background-color: #1e1e1e !important;
+                border-color: #444 !important;
+            }
+            
+            blockquote {
+                background-color: #2d2d2d !important;
+                border-left-color: #007acc !important;
+            }
+            
+            hr {
+                border-color: #444 !important;
+            }
+            
+            h1, h2, h3, h4, h5, h6 {
+                color: #569cd6 !important;
+            }
+`
+        }
+
         var styleSheet = document.createElement("style")
         styleSheet.type = "text/css"
         styleSheet.innerText = styles
         document.head.appendChild(styleSheet)
-    })
+    }, mode)
 
     // Add table of contents
     await page.evaluate(() => {
@@ -141,7 +220,7 @@ async function fetchBook(book_key: string, browser: Browser, mode: "dark" | "lig
         await delay(20 * 1000)
     }
 
-    let dest = path.resolve(book.file_name.replace(".pdf", `_${mode}.pdf`))
+    let dest = path.join(OUTPUT_DIR, book.file_name.replace(".pdf", `_${mode}.pdf`))
     await page.pdf({
         path: dest,
         format: "A4",
