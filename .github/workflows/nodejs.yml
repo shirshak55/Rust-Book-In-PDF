@@ -19,7 +19,7 @@ jobs:
               with:
                   bun-version: latest
             - run: bun install
-            - run: bunx playwright install --with-deps
+            - run: bunx playwright install chromium --with-deps
             - run: bun start
 
             - uses: "marvinpinto/action-automatic-releases@latest"
