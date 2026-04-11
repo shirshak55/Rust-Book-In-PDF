@@ -98,6 +98,7 @@ file_name="unstable_book.pdf"
 [Books.RustRFCs]
 print_url="https://rust-lang.github.io/rfcs/print.html"
 file_name="rust_rfcs.pdf"
+display_title="Rust RFCs"
 
 [Books.RustAPIGuidelines]
 print_url="https://rust-lang.github.io/api-guidelines/print.html"

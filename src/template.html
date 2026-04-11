@@ -52,7 +52,7 @@
     .btn-light:hover{background:var(--light-hover)}
     .btn-dark{background:var(--dark-btn);color:#fff}
     .btn-dark:hover{background:var(--dark-hover)}
-    .btn[disabled]{opacity:.5;pointer-events:none}
+    .btn[aria-disabled="true"]{opacity:.5;pointer-events:none}
     .btn::before{content:"\2193";font-weight:700}
     footer{text-align:center;margin-top:3rem}
     .github-btn{
@@ -108,10 +108,12 @@
           const url = assets.get(btn.dataset.asset);
           if (url) {
             btn.href = url;
-            btn.removeAttribute("disabled");
+            btn.removeAttribute("aria-disabled");
+            btn.removeAttribute("tabindex");
             linked++;
           } else {
-            btn.setAttribute("disabled", "");
+            btn.setAttribute("aria-disabled", "true");
+            btn.setAttribute("tabindex", "-1");
             btn.removeAttribute("href");
           }
         }
@@ -139,7 +141,8 @@
         status.textContent = "Could not load release info. Download from GitHub Releases directly.";
         for (const btn of document.querySelectorAll("[data-asset]")) {
           btn.href = "https://github.com/" + REPO + "/releases/latest";
-          btn.removeAttribute("disabled");
+          btn.removeAttribute("aria-disabled");
+          btn.removeAttribute("tabindex");
         }
       }
     })();

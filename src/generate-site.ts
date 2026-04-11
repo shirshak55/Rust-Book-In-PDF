@@ -1,29 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-import toml from "toml";
+import { type AppConfig, getProjectRoot, loadConfig } from "./shared/config.ts";
 import { createLogger } from "./shared/logger.ts";
+import { normalizeHttpUrl } from "./shared/url.ts";
 
-const DIR = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(DIR, "..");
-
-interface AppConfig {
-  Site?: {
-    repo: string;
-  };
-  Books: Record<
-    string,
-    {
-      print_url: string;
-      file_name: string;
-      display_title?: string;
-    }
-  >;
-}
-
-const config = toml.parse(
-  fs.readFileSync(path.join(ROOT, "config.toml"), "utf-8"),
-) as AppConfig;
+const PROJECT_ROOT = getProjectRoot(import.meta.url);
+const config = loadConfig(import.meta.url);
 const logger = createLogger("site-generator");
 
 function escapeHtml(value: string) {
@@ -33,10 +15,6 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
-}
-
-function normalizeUrl(url: string) {
-  return new URL(url).toString();
 }
 
 function ensureRepo(repo: string | undefined) {
@@ -70,7 +48,7 @@ function buildBookCards(books: AppConfig["Books"]) {
   return Object.entries(books)
     .map(([key, book]) => {
       const title = escapeHtml((book.display_title ?? toTitle(key)).trim());
-      const printUrl = escapeHtml(normalizeUrl(book.print_url));
+      const printUrl = escapeHtml(normalizeHttpUrl(book.print_url));
       const baseName = escapeHtml(toAssetBaseName(book.file_name));
       return `      <div class="card">
         <div class="card-title">
@@ -86,12 +64,15 @@ function buildBookCards(books: AppConfig["Books"]) {
 }
 
 const repo = ensureRepo(config.Site?.repo);
-const template = fs.readFileSync(path.join(DIR, "template.html"), "utf-8");
+const template = fs.readFileSync(
+  path.join(PROJECT_ROOT, "src", "template.html"),
+  "utf-8",
+);
 const html = template
   .replace("<!-- {{BOOK_CARDS}} -->", buildBookCards(config.Books))
   .replaceAll("{{REPO}}", repo);
 
-const docsDir = path.join(ROOT, "docs");
+const docsDir = path.join(PROJECT_ROOT, "docs");
 fs.mkdirSync(docsDir, { recursive: true });
 fs.writeFileSync(path.join(docsDir, "index.html"), html);
 logger.info("Generated docs/index.html");

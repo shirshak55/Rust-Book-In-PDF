@@ -4,33 +4,21 @@ import type { Page } from "playwright";
 import path from "node:path";
 import process from "node:process";
 import fs from "node:fs";
-import { fileURLToPath } from "node:url";
-import toml from "toml";
 import pLimit from "p-limit";
 import { setTimeout as delay } from "node:timers/promises";
+import { getProjectRoot, loadConfig } from "./shared/config.ts";
 import { createLogger } from "./shared/logger.ts";
+import { normalizeHttpUrl } from "./shared/url.ts";
 
-interface AppConfig {
-  Books: Record<
-    string,
-    {
-      print_url: string;
-      file_name: string;
-    }
-  >;
-}
-
-const ROOT = path.dirname(fileURLToPath(import.meta.url));
-const config = toml.parse(
-  fs.readFileSync(path.join(ROOT, "..", "config.toml"), "utf-8"),
-) as AppConfig;
+const PROJECT_ROOT = getProjectRoot(import.meta.url);
+const config = loadConfig(import.meta.url);
 const BOOK_FORMAT_CSS = fs.readFileSync(
-  path.join(ROOT, "book-format.css"),
+  path.join(PROJECT_ROOT, "src", "book-format.css"),
   "utf-8",
 );
 const logger = createLogger("pdf-generator");
 
-const OUTPUT_DIR = path.resolve(ROOT, "..", "output");
+const OUTPUT_DIR = path.join(PROJECT_ROOT, "output");
 if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
@@ -50,7 +38,7 @@ async function main() {
 
   const limit = pLimit(10);
   const failed: string[] = [];
-  const proms = [];
+  const proms: Promise<void>[] = [];
 
   for (const book_key of Object.keys(config.Books)) {
     for (const mode of ["dark", "light"] as const) {
@@ -137,8 +125,9 @@ async function fetchBook(
     const book = config.Books[book_key];
 
     logger.info({ bookKey: book_key, mode }, "Download from source");
+    const printUrl = normalizeHttpUrl(book.print_url);
 
-    await page.goto(book.print_url, {
+    await page.goto(printUrl, {
       timeout: 60_000,
       waitUntil: "domcontentloaded",
     });

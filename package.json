@@ -13,7 +13,8 @@
         "format": "oxfmt .",
         "format:check": "oxfmt --check .",
         "typecheck": "tsc --noEmit",
-        "knip": "knip"
+        "knip": "knip",
+        "prepare": "simple-git-hooks"
     },
     "dependencies": {
         "p-limit": "^6.1.0",
