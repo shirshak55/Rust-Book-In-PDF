@@ -35,7 +35,6 @@ if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
-
 main().catch((e) => {
   logger.error({ err: e }, "Error on main");
   process.exit(1);
@@ -84,8 +83,6 @@ async function main() {
   logger.info("Completed");
   process.exit(0);
 }
-
-
 
 function getSettleDelayMs(debugOnlyFirst: boolean) {
   const configuredDelay = Number.parseInt(
@@ -231,4 +228,3 @@ async function fetchBook(
     await context.close();
   }
 }
-
