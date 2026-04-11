@@ -8,16 +8,22 @@ Feel free to send a pull request. We follow the Rust Code of Conduct.
 
 
 ### Development
-To run this project, please install [Bun](https://bun.sh/).
+To run this project, install [Node](https://nodejs.org/) 25+ and pnpm.
 
 ```bash
 git clone https://github.com/shirshak55/Rust-Book-In-PDF.git
-bun install
-bunx playwright install chromium
-bun start
+pnpm install
+pnpm exec playwright install chromium
+pnpm start
 ```
 
-This will run the project and download all the books in the config.toml file. You can also run `bun start` with `DEBUG_ONLY_FRIST=true` to only download the first page of the book for easier debugging.
+This downloads all books listed in `config.toml`.
+
+Use `DEBUG_ONLY_FIRST=true pnpm start` to process only the first book during debugging.
+
+Use `PRINT_SETTLE_MS=12000 pnpm start` to enforce a longer fixed settle delay before printing.
+
+Use `pnpm generate-site` to regenerate `docs/index.html`.
 
 ### Support us
 

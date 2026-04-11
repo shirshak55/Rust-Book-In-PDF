@@ -2,16 +2,16 @@
     "compilerOptions": {
         "target": "esnext",
         "strict": true,
-        "module": "esnext",
-        "moduleResolution": "node",
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
         "isolatedModules": true,
-        "esModuleInterop": true,
-        "inlineSourceMap": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
         "skipLibCheck": true,
         "lib": ["esnext", "dom"],
-        "outDir": "./dist",
-        "rootDir": "./src"
+        "erasableSyntaxOnly": true,
+        "verbatimModuleSyntax": true
     },
-    "exclude": ["node_modules"],
-    "files": ["main.ts"]
+    "exclude": ["node_modules", "docs"],
+    "include": ["src"]
 }

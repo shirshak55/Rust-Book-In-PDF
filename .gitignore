@@ -2,3 +2,4 @@ node_modules
 *.pdf
 .vscode
 output
+.DS_Store

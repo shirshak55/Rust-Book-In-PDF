@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rust Books in PDF</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦀</text></svg>">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;
+      --text:#e2e8f0;--muted:#94a3b8;
+      --accent:#f74c00;--accent-hover:#ff6a2a;
+      --light-btn:#3b82f6;--light-hover:#60a5fa;
+      --dark-btn:#6366f1;--dark-hover:#818cf8;
+    }
+    body{
+      font-family:'Nunito',system-ui,-apple-system,sans-serif;
+      background:var(--bg);color:var(--text);
+      min-height:100vh;padding:2rem 1rem;
+    }
+    .container{max-width:1200px;margin:0 auto}
+    header{text-align:center;margin-bottom:3rem}
+    header h1{font-size:2.5rem;font-weight:800;margin-bottom:.5rem}
+    header h1 span{color:var(--accent)}
+    header .github-btn{margin-top:1rem}
+    .status{text-align:center;color:var(--muted);margin-bottom:1.5rem;font-size:.9rem}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:1rem;
+    }
+    .card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:12px;padding:1.25rem;
+      display:flex;flex-direction:column;gap:.75rem;
+      transition:border-color .2s;
+    }
+    .card:hover{border-color:var(--accent)}
+    .card-title a{
+      color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem;
+    }
+    .card-title a:hover{color:var(--accent)}
+    .card-actions{display:flex;gap:.5rem}
+    .btn{
+      display:inline-flex;align-items:center;gap:.35rem;
+      padding:.45rem 1rem;border-radius:8px;font-size:.85rem;font-weight:500;
+      text-decoration:none;transition:background .2s;cursor:pointer;
+    }
+    .btn-light{background:var(--light-btn);color:#fff}
+    .btn-light:hover{background:var(--light-hover)}
+    .btn-dark{background:var(--dark-btn);color:#fff}
+    .btn-dark:hover{background:var(--dark-hover)}
+    .btn[disabled]{opacity:.5;pointer-events:none}
+    .btn::before{content:"\2193";font-weight:700}
+    footer{text-align:center;margin-top:3rem}
+    .github-btn{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.5rem 1.2rem;border-radius:8px;font-size:.9rem;font-weight:600;
+      color:#fff;background:var(--accent);text-decoration:none;transition:background .2s;
+    }
+    .github-btn:hover{background:var(--accent-hover)}
+    @media(max-width:640px){
+      header h1{font-size:1.75rem}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🦀 <span>Rust Books</span> in PDF</h1>
+      <a class="github-btn" href="https://github.com/shirshak55/Rust-Book-In-PDF" target="_blank" rel="noopener">&#9733; Star on GitHub</a>
+    </header>
+    <div class="status" id="status">Loading latest release&hellip;</div>
+    <div class="grid">
+            <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/book/print.html" target="_blank" rel="noopener">The Rust Programming Language</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="the_rust_programming_language_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="the_rust_programming_language_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://highassurance.rs/print.html" target="_blank" rel="noopener">High Assurance Rust</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="high_assurance_rust_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="high_assurance_rust_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/nomicon/print.html" target="_blank" rel="noopener">Nomicon</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="nomicon_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="nomicon_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-lang-nursery.github.io/rust-cookbook/print.html" target="_blank" rel="noopener">Rust Cookbook</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="cookbook_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="cookbook_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rustwasm.github.io/docs/book/print.html" target="_blank" rel="noopener">Rust Wasm</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_wasm_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_wasm_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://dhghomon.github.io/easy_rust/print.html" target="_blank" rel="noopener">Easy Rust</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="easy_rust_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="easy_rust_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://docs.rust-embedded.org/book/print.html" target="_blank" rel="noopener">Embedded Rust</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="embedded_rust_book_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="embedded_rust_book_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/reference/print.html" target="_blank" rel="noopener">Rust Reference</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_reference_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_reference_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-cli.github.io/book/print.html" target="_blank" rel="noopener">Rust CLI</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_cli_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_cli_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/rust-by-example/print.html" target="_blank" rel="noopener">Rust By Example</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_by_example_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_by_example_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-fuzz.github.io/book/print.html" target="_blank" rel="noopener">Rust Fuzz Book</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_fuzz_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_fuzz_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://nnethercote.github.io/perf-book/print.html" target="_blank" rel="noopener">Rust Performance Book</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_performance_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_performance_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-unofficial.github.io/patterns/print.html" target="_blank" rel="noopener">Rust Design Patterns</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_design_patterns_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_design_patterns_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-unofficial.github.io/too-many-lists/print.html" target="_blank" rel="noopener">Learn With Linked List</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_linked_list_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_linked_list_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-unofficial.github.io/rust-practise-questions/print.html" target="_blank" rel="noopener">Rust Practise Questions</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_practise_questions_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_practise_questions_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://docs.rust-embedded.org/discovery/microbit/print.html" target="_blank" rel="noopener">The Rust Discovery Microbit</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="microbit_beginner_rust_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="microbit_beginner_rust_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://docs.rust-embedded.org/discovery/f3discovery/print.html" target="_blank" rel="noopener">The Rust Discovery STM</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="stm32f3discovery_beginner_rust_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="stm32f3discovery_beginner_rust_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/cargo/print.html" target="_blank" rel="noopener">Cargo Book</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="cargo_book_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="cargo_book_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/edition-guide/print.html" target="_blank" rel="noopener">Edition Guide</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="edition_guide_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="edition_guide_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/rustc/print.html" target="_blank" rel="noopener">Rustc Book</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rustc_book_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rustc_book_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/stable/rustdoc/print.html" target="_blank" rel="noopener">Rustdoc Book</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rustdoc_book_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rustdoc_book_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-lang.github.io/rustup/print.html" target="_blank" rel="noopener">Rustup Book</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rustup_book_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rustup_book_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://doc.rust-lang.org/unstable-book/print.html" target="_blank" rel="noopener">Unstable Book</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="unstable_book_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="unstable_book_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-lang.github.io/rfcs/print.html" target="_blank" rel="noopener">Rust RF Cs</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_rfcs_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_rfcs_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-lang.github.io/api-guidelines/print.html" target="_blank" rel="noopener">Rust API Guidelines</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_api_guidelines_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_api_guidelines_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rustc-dev-guide.rust-lang.org/print.html" target="_blank" rel="noopener">Rustc Dev Guide</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rustc_dev_guide_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rustc_dev_guide_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-lang.github.io/async-book/print.html" target="_blank" rel="noopener">Async Programming</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="async_programming_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="async_programming_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rust-lang.github.io/unsafe-code-guidelines/print.html" target="_blank" rel="noopener">Unsafe Code Guidelines</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="unsafe_code_guidelines_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="unsafe_code_guidelines_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://google.github.io/comprehensive-rust/print.html" target="_blank" rel="noopener">Comprehensive Rust</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="comprehensive_rust_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="comprehensive_rust_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://www.lurklurk.org/effective-rust/print.html" target="_blank" rel="noopener">Effective Rust</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="effective_rust_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="effective_rust_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://veykril.github.io/tlborm/print.html" target="_blank" rel="noopener">Little Book Of Rust Macros</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="rust_macros_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="rust_macros_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://docs.rust-embedded.org/embedonomicon/print.html" target="_blank" rel="noopener">Embedonomicon</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="embedonomicon_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="embedonomicon_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://rustwasm.github.io/docs/wasm-bindgen/print.html" target="_blank" rel="noopener">Wasm Bindgen Guide</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="wasm_bindgen_guide_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="wasm_bindgen_guide_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <a href="https://tfpk.github.io/lifetimekata/print.html" target="_blank" rel="noopener">Lifetime Kata</a>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-light" data-asset="lifetime_kata_light.pdf" href="#">Light</a>
+          <a class="btn btn-dark" data-asset="lifetime_kata_dark.pdf" href="#">Dark</a>
+        </div>
+      </div>
+    </div>
+    <footer></footer>
+  </div>
+  <script>
+    const REPO = "shirshak55/Rust-Book-In-PDF";
+    (async () => {
+      const status = document.getElementById("status");
+      if (!status) return;
+      try {
+        const res = await fetch(
+          "https://api.github.com/repos/" + REPO + "/releases/latest",
+          {
+            headers: {
+              Accept: "application/vnd.github+json",
+            },
+          },
+        );
+        if (!res.ok) {
+          throw new Error("GitHub API request failed with " + res.status);
+        }
+        const release = await res.json();
+        const assets = new Map(
+          (release.assets ?? []).map((asset) => [
+            asset.name,
+            asset.browser_download_url,
+          ]),
+        );
+        let linked = 0;
+        for (const btn of document.querySelectorAll("[data-asset]")) {
+          const url = assets.get(btn.dataset.asset);
+          if (url) {
+            btn.href = url;
+            btn.removeAttribute("disabled");
+            linked++;
+          } else {
+            btn.setAttribute("disabled", "");
+            btn.removeAttribute("href");
+          }
+        }
+        const publishedAt = release.published_at
+          ? new Date(release.published_at)
+          : null;
+        const dateLabel = publishedAt
+          ? publishedAt.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : "unknown date";
+        const releaseName = release.name || release.tag_name || "latest";
+        status.textContent =
+          "Latest release: " +
+          releaseName +
+          " (" +
+          dateLabel +
+          ") — " +
+          linked +
+          " PDFs available";
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Could not load release info. Download from GitHub Releases directly.";
+        for (const btn of document.querySelectorAll("[data-asset]")) {
+          btn.href = "https://github.com/" + REPO + "/releases/latest";
+          btn.removeAttribute("disabled");
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

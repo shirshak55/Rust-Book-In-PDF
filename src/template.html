@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rust Books in PDF</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦀</text></svg>">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;
+      --text:#e2e8f0;--muted:#94a3b8;
+      --accent:#f74c00;--accent-hover:#ff6a2a;
+      --light-btn:#3b82f6;--light-hover:#60a5fa;
+      --dark-btn:#6366f1;--dark-hover:#818cf8;
+    }
+    body{
+      font-family:'Nunito',system-ui,-apple-system,sans-serif;
+      background:var(--bg);color:var(--text);
+      min-height:100vh;padding:2rem 1rem;
+    }
+    .container{max-width:1200px;margin:0 auto}
+    header{text-align:center;margin-bottom:3rem}
+    header h1{font-size:2.5rem;font-weight:800;margin-bottom:.5rem}
+    header h1 span{color:var(--accent)}
+    header .github-btn{margin-top:1rem}
+    .status{text-align:center;color:var(--muted);margin-bottom:1.5rem;font-size:.9rem}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:1rem;
+    }
+    .card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:12px;padding:1.25rem;
+      display:flex;flex-direction:column;gap:.75rem;
+      transition:border-color .2s;
+    }
+    .card:hover{border-color:var(--accent)}
+    .card-title a{
+      color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem;
+    }
+    .card-title a:hover{color:var(--accent)}
+    .card-actions{display:flex;gap:.5rem}
+    .btn{
+      display:inline-flex;align-items:center;gap:.35rem;
+      padding:.45rem 1rem;border-radius:8px;font-size:.85rem;font-weight:500;
+      text-decoration:none;transition:background .2s;cursor:pointer;
+    }
+    .btn-light{background:var(--light-btn);color:#fff}
+    .btn-light:hover{background:var(--light-hover)}
+    .btn-dark{background:var(--dark-btn);color:#fff}
+    .btn-dark:hover{background:var(--dark-hover)}
+    .btn[disabled]{opacity:.5;pointer-events:none}
+    .btn::before{content:"\2193";font-weight:700}
+    footer{text-align:center;margin-top:3rem}
+    .github-btn{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.5rem 1.2rem;border-radius:8px;font-size:.9rem;font-weight:600;
+      color:#fff;background:var(--accent);text-decoration:none;transition:background .2s;
+    }
+    .github-btn:hover{background:var(--accent-hover)}
+    @media(max-width:640px){
+      header h1{font-size:1.75rem}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🦀 <span>Rust Books</span> in PDF</h1>
+      <a class="github-btn" href="https://github.com/{{REPO}}" target="_blank" rel="noopener">&#9733; Star on GitHub</a>
+    </header>
+    <div class="status" id="status">Loading latest release&hellip;</div>
+    <div class="grid">
+      <!-- {{BOOK_CARDS}} -->
+    </div>
+    <footer></footer>
+  </div>
+  <script>
+    const REPO = "{{REPO}}";
+    (async () => {
+      const status = document.getElementById("status");
+      if (!status) return;
+      try {
+        const res = await fetch(
+          "https://api.github.com/repos/" + REPO + "/releases/latest",
+          {
+            headers: {
+              Accept: "application/vnd.github+json",
+            },
+          },
+        );
+        if (!res.ok) {
+          throw new Error("GitHub API request failed with " + res.status);
+        }
+        const release = await res.json();
+        const assets = new Map(
+          (release.assets ?? []).map((asset) => [
+            asset.name,
+            asset.browser_download_url,
+          ]),
+        );
+        let linked = 0;
+        for (const btn of document.querySelectorAll("[data-asset]")) {
+          const url = assets.get(btn.dataset.asset);
+          if (url) {
+            btn.href = url;
+            btn.removeAttribute("disabled");
+            linked++;
+          } else {
+            btn.setAttribute("disabled", "");
+            btn.removeAttribute("href");
+          }
+        }
+        const publishedAt = release.published_at
+          ? new Date(release.published_at)
+          : null;
+        const dateLabel = publishedAt
+          ? publishedAt.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : "unknown date";
+        const releaseName = release.name || release.tag_name || "latest";
+        status.textContent =
+          "Latest release: " +
+          releaseName +
+          " (" +
+          dateLabel +
+          ") — " +
+          linked +
+          " PDFs available";
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Could not load release info. Download from GitHub Releases directly.";
+        for (const btn of document.querySelectorAll("[data-asset]")) {
+          btn.href = "https://github.com/" + REPO + "/releases/latest";
+          btn.removeAttribute("disabled");
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
