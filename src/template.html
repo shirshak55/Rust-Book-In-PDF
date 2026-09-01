@@ -1,151 +1,375 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rust Books in PDF</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦀</text></svg>">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;
-      --text:#e2e8f0;--muted:#94a3b8;
-      --accent:#f74c00;--accent-hover:#ff6a2a;
-      --light-btn:#3b82f6;--light-hover:#60a5fa;
-      --dark-btn:#6366f1;--dark-hover:#818cf8;
-    }
-    body{
-      font-family:'Nunito',system-ui,-apple-system,sans-serif;
-      background:var(--bg);color:var(--text);
-      min-height:100vh;padding:2rem 1rem;
-    }
-    .container{max-width:1200px;margin:0 auto}
-    header{text-align:center;margin-bottom:3rem}
-    header h1{font-size:2.5rem;font-weight:800;margin-bottom:.5rem}
-    header h1 span{color:var(--accent)}
-    header .github-btn{margin-top:1rem}
-    .status{text-align:center;color:var(--muted);margin-bottom:1.5rem;font-size:.9rem}
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-      gap:1rem;
-    }
-    .card{
-      background:var(--surface);border:1px solid var(--border);
-      border-radius:12px;padding:1.25rem;
-      display:flex;flex-direction:column;gap:.75rem;
-      transition:border-color .2s;
-    }
-    .card:hover{border-color:var(--accent)}
-    .card-title a{
-      color:var(--text);text-decoration:none;font-weight:600;font-size:1.05rem;
-    }
-    .card-title a:hover{color:var(--accent)}
-    .card-actions{display:flex;gap:.5rem}
-    .btn{
-      display:inline-flex;align-items:center;gap:.35rem;
-      padding:.45rem 1rem;border-radius:8px;font-size:.85rem;font-weight:500;
-      text-decoration:none;transition:background .2s;cursor:pointer;
-    }
-    .btn-light{background:var(--light-btn);color:#fff}
-    .btn-light:hover{background:var(--light-hover)}
-    .btn-dark{background:var(--dark-btn);color:#fff}
-    .btn-dark:hover{background:var(--dark-hover)}
-    .btn[aria-disabled="true"]{opacity:.5;pointer-events:none}
-    .btn::before{content:"\2193";font-weight:700}
-    footer{text-align:center;margin-top:3rem}
-    .github-btn{
-      display:inline-flex;align-items:center;gap:.4rem;
-      padding:.5rem 1.2rem;border-radius:8px;font-size:.9rem;font-weight:600;
-      color:#fff;background:var(--accent);text-decoration:none;transition:background .2s;
-    }
-    .github-btn:hover{background:var(--accent-hover)}
-    @media(max-width:640px){
-      header h1{font-size:1.75rem}
-      .grid{grid-template-columns:1fr}
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>🦀 <span>Rust Books</span> in PDF</h1>
-      <a class="github-btn" href="https://github.com/{{REPO}}" target="_blank" rel="noopener">&#9733; Star on GitHub</a>
-    </header>
-    <div class="status" id="status">Loading latest release&hellip;</div>
-    <div class="grid">
-      <!-- {{BOOK_CARDS}} -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rust Books in PDF</title>
+    <meta
+      name="description"
+      content="Free Rust books as light and dark PDFs, rebuilt monthly from their original sources."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦀</text></svg>"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface-alt: #161923;
+        --border: #2a2d3a;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #f74c00;
+        --accent-hover: #ff6a2a;
+        --light-btn: #3b82f6;
+        --light-hover: #60a5fa;
+        --dark-btn: #6366f1;
+        --dark-hover: #818cf8;
+        --row-hover: #20242f;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f8fafc;
+          --surface: #ffffff;
+          --surface-alt: #f1f5f9;
+          --border: #e2e8f0;
+          --text: #1e293b;
+          --muted: #64748b;
+          --row-hover: #eef2f7;
+        }
+      }
+      body {
+        font-family:
+          "Nunito",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        padding: 2rem 1rem;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+      header h1 span {
+        color: var(--accent);
+      }
+      header p {
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+      .search-wrap {
+        max-width: 420px;
+        margin: 0 auto 2rem;
+      }
+      #search {
+        width: 100%;
+        padding: 0.65rem 1rem;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #search:focus {
+        border-color: var(--accent);
+      }
+      #search::placeholder {
+        color: var(--muted);
+      }
+      .table-wrap {
+        overflow-x: auto;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead th {
+        text-align: left;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.9rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .category-row th {
+        text-align: left;
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--accent);
+        padding: 1.1rem 1.25rem 0.6rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface-alt);
+      }
+      .category-row .count {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 0.05rem 0.55rem;
+        margin-left: 0.4rem;
+        vertical-align: middle;
+      }
+      .book td {
+        padding: 0.65rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+      tbody:last-child .book:last-child td {
+        border-bottom: none;
+      }
+      .book:hover td {
+        background: var(--row-hover);
+      }
+      .book[hidden],
+      .category[hidden] {
+        display: none;
+      }
+      .book-title a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.98rem;
+      }
+      .book-title a:hover {
+        color: var(--accent);
+      }
+      td.dl {
+        width: 1%;
+        white-space: nowrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s;
+        cursor: pointer;
+      }
+      .btn .size {
+        font-size: 0.68rem;
+        opacity: 0.85;
+        font-weight: 400;
+      }
+      .btn-light {
+        background: var(--light-btn);
+        color: #fff;
+      }
+      .btn-light:hover {
+        background: var(--light-hover);
+      }
+      .btn-dark {
+        background: var(--dark-btn);
+        color: #fff;
+      }
+      .btn-dark:hover {
+        background: var(--dark-hover);
+      }
+      .btn[aria-disabled="true"] {
+        opacity: 0.45;
+        pointer-events: none;
+      }
+      .btn::before {
+        content: "\2193";
+        font-weight: 700;
+      }
+      .no-results {
+        text-align: center;
+        color: var(--muted);
+        padding: 2rem 0;
+      }
+      .no-results[hidden] {
+        display: none;
+      }
+      footer {
+        text-align: center;
+        margin-top: 2.5rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      footer p {
+        margin-top: 1rem;
+      }
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+      .github-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 1.2rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #fff;
+        background: var(--accent);
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .github-btn:hover {
+        background: var(--accent-hover);
+      }
+      @media (max-width: 640px) {
+        body {
+          padding: 1rem 0.5rem;
+        }
+        header h1 {
+          font-size: 1.75rem;
+        }
+        thead {
+          display: none;
+        }
+        .book td,
+        .category-row th {
+          padding: 0.6rem 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🦀 <span>Rust Books</span> in PDF</h1>
+        <p>Free Rust books as light and dark PDFs, rebuilt monthly from their original sources.</p>
+        <a class="github-btn" href="https://github.com/{{REPO}}" target="_blank" rel="noopener"
+          >&#9733; Star on GitHub</a
+        >
+      </header>
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search books&hellip;" autocomplete="off" />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Book</th>
+              <th colspan="2">Download</th>
+            </tr>
+          </thead>
+          <!-- {{BOOK_ROWS}} -->
+        </table>
+      </div>
+      <p class="no-results" id="no-results" hidden>No books match your search.</p>
+      <footer>
+        <p>
+          All books belong to their respective authors. This site only bundles freely available
+          online books as PDFs.
+        </p>
+        <p>
+          <a href="https://github.com/{{REPO}}/releases/latest" target="_blank" rel="noopener"
+            >Browse all files on the latest release &rarr;</a
+          >
+        </p>
+      </footer>
     </div>
-    <footer></footer>
-  </div>
-  <script>
-    const REPO = "{{REPO}}";
-    (async () => {
-      const status = document.getElementById("status");
-      if (!status) return;
-      try {
-        const res = await fetch(
-          "https://api.github.com/repos/" + REPO + "/releases/latest",
-          {
+    <script>
+      const REPO = "{{REPO}}";
+
+      const search = document.getElementById("search");
+      if (search) {
+        search.addEventListener("input", () => {
+          const query = search.value.trim().toLowerCase();
+          let anyVisible = false;
+          for (const section of document.querySelectorAll("tbody.category")) {
+            let visibleInSection = 0;
+            for (const row of section.querySelectorAll("tr.book")) {
+              const matches = !query || (row.dataset.title || "").includes(query);
+              row.hidden = !matches;
+              if (matches) visibleInSection++;
+            }
+            section.hidden = visibleInSection === 0;
+            if (visibleInSection > 0) anyVisible = true;
+          }
+          const noResults = document.getElementById("no-results");
+          if (noResults) noResults.hidden = anyVisible;
+        });
+      }
+
+      function formatSize(bytes) {
+        if (!Number.isFinite(bytes) || bytes <= 0) return "";
+        if (bytes >= 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+        return Math.round(bytes / 1024) + " KB";
+      }
+
+      (async () => {
+        try {
+          const res = await fetch("https://api.github.com/repos/" + REPO + "/releases/latest", {
             headers: {
               Accept: "application/vnd.github+json",
             },
-          },
-        );
-        if (!res.ok) {
-          throw new Error("GitHub API request failed with " + res.status);
-        }
-        const release = await res.json();
-        const assets = new Map(
-          (release.assets ?? []).map((asset) => [
-            asset.name,
-            asset.browser_download_url,
-          ]),
-        );
-        let linked = 0;
-        for (const btn of document.querySelectorAll("[data-asset]")) {
-          const url = assets.get(btn.dataset.asset);
-          if (url) {
-            btn.href = url;
+          });
+          if (!res.ok) {
+            throw new Error("GitHub API request failed with " + res.status);
+          }
+          const release = await res.json();
+          const assets = new Map((release.assets ?? []).map((asset) => [asset.name, asset]));
+          for (const btn of document.querySelectorAll("[data-asset]")) {
+            const asset = assets.get(btn.dataset.asset);
+            if (asset) {
+              btn.href = asset.browser_download_url;
+              btn.removeAttribute("aria-disabled");
+              btn.removeAttribute("tabindex");
+              const size = formatSize(asset.size);
+              if (size && !btn.querySelector(".size")) {
+                const label = document.createElement("span");
+                label.className = "size";
+                label.textContent = size;
+                btn.appendChild(label);
+              }
+            } else {
+              btn.setAttribute("aria-disabled", "true");
+              btn.setAttribute("tabindex", "-1");
+              btn.removeAttribute("href");
+            }
+          }
+        } catch (error) {
+          console.error(error);
+          for (const btn of document.querySelectorAll("[data-asset]")) {
+            btn.href = "https://github.com/" + REPO + "/releases/latest";
             btn.removeAttribute("aria-disabled");
             btn.removeAttribute("tabindex");
-            linked++;
-          } else {
-            btn.setAttribute("aria-disabled", "true");
-            btn.setAttribute("tabindex", "-1");
-            btn.removeAttribute("href");
           }
         }
-        const publishedAt = release.published_at
-          ? new Date(release.published_at)
-          : null;
-        const dateLabel = publishedAt
-          ? publishedAt.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          : "unknown date";
-        const releaseName = release.name || release.tag_name || "latest";
-        status.textContent =
-          "Latest release: " +
-          releaseName +
-          " (" +
-          dateLabel +
-          ") — " +
-          linked +
-          " PDFs available";
-      } catch (error) {
-        console.error(error);
-        status.textContent = "Could not load release info. Download from GitHub Releases directly.";
-        for (const btn of document.querySelectorAll("[data-asset]")) {
-          btn.href = "https://github.com/" + REPO + "/releases/latest";
-          btn.removeAttribute("aria-disabled");
-          btn.removeAttribute("tabindex");
-        }
-      }
-    })();
-  </script>
-</body>
+      })();
+    </script>
+  </body>
 </html>

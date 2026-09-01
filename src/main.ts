@@ -12,10 +12,7 @@ import { normalizeHttpUrl } from "./shared/url.ts";
 
 const PROJECT_ROOT = getProjectRoot(import.meta.url);
 const config = loadConfig(import.meta.url);
-const BOOK_FORMAT_CSS = fs.readFileSync(
-  path.join(PROJECT_ROOT, "src", "book-format.css"),
-  "utf-8",
-);
+const BOOK_FORMAT_CSS = fs.readFileSync(path.join(PROJECT_ROOT, "src", "book-format.css"), "utf-8");
 const logger = createLogger("pdf-generator");
 
 const OUTPUT_DIR = path.join(PROJECT_ROOT, "output");
@@ -30,7 +27,11 @@ main().catch((e) => {
 
 async function main() {
   const debugOnlyFirst = process.env.DEBUG_ONLY_FIRST === "true";
-  logger.info({ debugFirstPageOnly: debugOnlyFirst }, "Starting");
+  const debugOnlyBook = process.env.DEBUG_ONLY_BOOK;
+  if (debugOnlyBook && !(debugOnlyBook in config.Books)) {
+    throw new Error(`DEBUG_ONLY_BOOK "${debugOnlyBook}" is not a key in config.toml`);
+  }
+  logger.info({ debugFirstPageOnly: debugOnlyFirst, debugOnlyBook }, "Starting");
   logger.info({ outputDir: OUTPUT_DIR }, "Output directory");
   const settleDelayMs = getSettleDelayMs(debugOnlyFirst);
   logger.info({ settleDelayMs }, "Print settle delay");
@@ -41,10 +42,13 @@ async function main() {
   const proms: Promise<void>[] = [];
 
   for (const book_key of Object.keys(config.Books)) {
+    if (debugOnlyBook && book_key !== debugOnlyBook) {
+      continue;
+    }
     for (const mode of ["dark", "light"] as const) {
       proms.push(
         limit(() =>
-          fetchBook(book_key, browser, mode, settleDelayMs).catch((e) => {
+          fetchBookWithRetry(book_key, browser, mode, settleDelayMs).catch((e) => {
             logger.error({ err: e, bookKey: book_key, mode }, "Book failed");
             failed.push(`${book_key} (${mode})`);
           }),
@@ -73,10 +77,7 @@ async function main() {
 }
 
 function getSettleDelayMs(debugOnlyFirst: boolean) {
-  const configuredDelay = Number.parseInt(
-    process.env.PRINT_SETTLE_MS ?? "",
-    10,
-  );
+  const configuredDelay = Number.parseInt(process.env.PRINT_SETTLE_MS ?? "", 10);
   if (Number.isFinite(configuredDelay) && configuredDelay > 0) {
     return Math.min(configuredDelay, 30_000);
   }
@@ -85,9 +86,7 @@ function getSettleDelayMs(debugOnlyFirst: boolean) {
 
 async function waitForPrintReadiness(page: Page, settleDelayMs: number) {
   await page.waitForLoadState("domcontentloaded", { timeout: 30_000 });
-  await page
-    .waitForLoadState("networkidle", { timeout: 15_000 })
-    .catch(() => undefined);
+  await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => undefined);
   await page
     .waitForFunction(() => document.readyState === "complete", {
       timeout: 30_000,
@@ -110,6 +109,28 @@ async function maybeToggleSidebar(page: Page, fileName: string) {
   const isVisible = await sidebarToggle.isVisible().catch(() => false);
   if (isVisible) {
     await sidebarToggle.click({ timeout: 5_000 });
+  }
+}
+
+const MAX_ATTEMPTS = 3;
+
+async function fetchBookWithRetry(
+  book_key: string,
+  browser: Browser,
+  mode: "dark" | "light",
+  settleDelayMs: number,
+) {
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      await fetchBook(book_key, browser, mode, settleDelayMs);
+      return;
+    } catch (e) {
+      if (attempt === MAX_ATTEMPTS) {
+        throw e;
+      }
+      logger.warn({ err: e, bookKey: book_key, mode, attempt }, "Retrying");
+      await delay(5_000 * attempt);
+    }
   }
 }
 
@@ -146,9 +167,7 @@ async function fetchBook(
       toc.id = "table-of-contents";
       toc.innerHTML = "<h2>Table of Contents</h2>";
       toc.style.margin = "40px";
-      const headings = document.querySelectorAll<HTMLHeadingElement>(
-        "h1, h2, h3, h4, h5, h6",
-      );
+      const headings = document.querySelectorAll<HTMLHeadingElement>("h1, h2, h3, h4, h5, h6");
       const tocList = document.createElement("ul");
       const usedIds = new Map<string, number>();
 
@@ -163,15 +182,12 @@ async function fetchBook(
       headings.forEach((heading, index) => {
         const listItem = document.createElement("li");
         const link = document.createElement("a");
-        const headingText =
-          heading.textContent?.trim() ?? `Section ${index + 1}`;
+        const headingText = heading.textContent?.trim() ?? `Section ${index + 1}`;
         const existingId = heading.id.trim();
-        const baseId =
-          existingId || slugify(headingText) || `heading-${index + 1}`;
+        const baseId = existingId || slugify(headingText) || `heading-${index + 1}`;
         const collisionCount = usedIds.get(baseId) ?? 0;
         usedIds.set(baseId, collisionCount + 1);
-        const stableId =
-          collisionCount === 0 ? baseId : `${baseId}-${collisionCount + 1}`;
+        const stableId = collisionCount === 0 ? baseId : `${baseId}-${collisionCount + 1}`;
 
         link.textContent = headingText;
         link.href = `#${stableId}`;
@@ -192,14 +208,13 @@ async function fetchBook(
     await maybeToggleSidebar(page, book.file_name);
     await waitForPrintReadiness(page, settleDelayMs);
 
-    const dest = path.join(
-      OUTPUT_DIR,
-      book.file_name.replace(".pdf", `_${mode}.pdf`),
-    );
+    const dest = path.join(OUTPUT_DIR, book.file_name.replace(".pdf", `_${mode}.pdf`));
     await page.pdf({
       path: dest,
       format: "A4",
       printBackground: true,
+      outline: true,
+      tagged: true, // Chromium only emits the outline (PDF bookmarks) for tagged PDFs
       margin: {
         top: 0,
         bottom: 0,

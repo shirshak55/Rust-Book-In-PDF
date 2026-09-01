@@ -13,6 +13,7 @@ export interface AppConfig {
       print_url: string;
       file_name: string;
       display_title?: string;
+      category?: string;
     }
   >;
 }
@@ -23,7 +24,5 @@ export function getProjectRoot(fromFileUrl: string) {
 
 export function loadConfig(fromFileUrl: string) {
   const projectRoot = getProjectRoot(fromFileUrl);
-  return toml.parse(
-    fs.readFileSync(path.join(projectRoot, "config.toml"), "utf-8"),
-  ) as AppConfig;
+  return toml.parse(fs.readFileSync(path.join(projectRoot, "config.toml"), "utf-8")) as AppConfig;
 }

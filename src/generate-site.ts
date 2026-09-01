@@ -33,9 +33,7 @@ function toTitle(value: string) {
     .split(/\s+/)
     .filter(Boolean)
     .map((word) =>
-      /^[A-Z0-9]{2,}$/.test(word)
-        ? word
-        : word[0].toUpperCase() + word.slice(1).toLowerCase(),
+      /^[A-Z0-9]{2,}$/.test(word) ? word : word[0].toUpperCase() + word.slice(1).toLowerCase(),
     )
     .join(" ");
 }
@@ -44,32 +42,39 @@ function toAssetBaseName(fileName: string) {
   return path.basename(fileName).replace(/\.pdf$/i, "");
 }
 
-function buildBookCards(books: AppConfig["Books"]) {
-  return Object.entries(books)
-    .map(([key, book]) => {
-      const title = escapeHtml((book.display_title ?? toTitle(key)).trim());
-      const printUrl = escapeHtml(normalizeHttpUrl(book.print_url));
-      const baseName = escapeHtml(toAssetBaseName(book.file_name));
-      return `      <div class="card">
-        <div class="card-title">
-          <a href="${printUrl}" target="_blank" rel="noopener">${title}</a>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-light" data-asset="${baseName}_light.pdf" href="#">Light</a>
-          <a class="btn btn-dark" data-asset="${baseName}_dark.pdf" href="#">Dark</a>
-        </div>
-      </div>`;
-    })
+function buildBookRow(key: string, book: AppConfig["Books"][string]) {
+  const title = (book.display_title ?? toTitle(key)).trim();
+  const printUrl = escapeHtml(normalizeHttpUrl(book.print_url));
+  const baseName = escapeHtml(toAssetBaseName(book.file_name));
+  return `        <tr class="book" data-title="${escapeHtml(title.toLowerCase())}">
+          <td class="book-title"><a href="${printUrl}" target="_blank" rel="noopener">${escapeHtml(title)}</a></td>
+          <td class="dl"><a class="btn btn-light" data-asset="${baseName}_light.pdf" href="#">Light</a></td>
+          <td class="dl"><a class="btn btn-dark" data-asset="${baseName}_dark.pdf" href="#">Dark</a></td>
+        </tr>`;
+}
+
+function buildBookTableBodies(books: AppConfig["Books"]) {
+  const sections = new Map<string, string[]>();
+  for (const [key, book] of Object.entries(books)) {
+    const category = book.category?.trim() || "Other";
+    const rows = sections.get(category) ?? [];
+    rows.push(buildBookRow(key, book));
+    sections.set(category, rows);
+  }
+  return [...sections.entries()]
+    .map(
+      ([category, rows]) => `      <tbody class="category">
+        <tr class="category-row"><th colspan="3">${escapeHtml(category)} <span class="count">${rows.length}</span></th></tr>
+${rows.join("\n")}
+      </tbody>`,
+    )
     .join("\n");
 }
 
 const repo = ensureRepo(config.Site?.repo);
-const template = fs.readFileSync(
-  path.join(PROJECT_ROOT, "src", "template.html"),
-  "utf-8",
-);
+const template = fs.readFileSync(path.join(PROJECT_ROOT, "src", "template.html"), "utf-8");
 const html = template
-  .replace("<!-- {{BOOK_CARDS}} -->", buildBookCards(config.Books))
+  .replace("<!-- {{BOOK_ROWS}} -->", buildBookTableBodies(config.Books))
   .replaceAll("{{REPO}}", repo);
 
 const docsDir = path.join(PROJECT_ROOT, "docs");
