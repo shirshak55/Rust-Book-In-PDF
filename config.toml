@@ -1,141 +1,401 @@
 [Site]
-repo="shirshak55/Rust-Book-In-PDF"
+repo = "shirshak55/Rust-Book-In-PDF"
+
+# ------------------------------------------------------------------
+# Learn Rust
+# ------------------------------------------------------------------
 
 [Books.The_Rust_Programming_Language]
-print_url="https://doc.rust-lang.org/book/print.html"
-file_name="the_rust_programming_language.pdf"
-
-[Books.High_Assurance_Rust]
-print_url="https://highassurance.rs/print.html"
-file_name="high_assurance_rust.pdf"
-
-[Books.Nomicon]
-print_url="https://doc.rust-lang.org/nomicon/print.html"
-file_name="nomicon.pdf"
-
-[Books.Rust_Cookbook]
-print_url="https://rust-lang-nursery.github.io/rust-cookbook/print.html"
-file_name="cookbook.pdf"
-
-[Books.RustWasm]
-print_url="https://rustwasm.github.io/docs/book/print.html"
-file_name="rust_wasm.pdf"
-
-[Books.EasyRust]
-print_url="https://dhghomon.github.io/easy_rust/print.html"
-file_name="easy_rust.pdf"
-
-[Books.EmbeddedRust]
-print_url="https://docs.rust-embedded.org/book/print.html"
-file_name="embedded_rust_book.pdf"
-
-[Books.RustReference]
-print_url="https://doc.rust-lang.org/reference/print.html"
-file_name="rust_reference.pdf"
-
-[Books.RustCLI]
-print_url="https://rust-cli.github.io/book/print.html"
-file_name="rust_cli.pdf"
-display_title="Rust CLI"
+print_url = "https://doc.rust-lang.org/book/print.html"
+file_name = "the_rust_programming_language.pdf"
+category = "Learn Rust"
 
 [Books.RustByExample]
-print_url="https://doc.rust-lang.org/rust-by-example/print.html"
-file_name="rust_by_example.pdf"
-
-[Books.RustFuzzBook]
-print_url="https://rust-fuzz.github.io/book/print.html"
-file_name="rust_fuzz.pdf"
-
-[Books.RustPerformanceBook]
-print_url="https://nnethercote.github.io/perf-book/print.html"
-file_name="rust_performance.pdf"
-
-[Books.RustDesignPatterns]
-print_url="https://rust-unofficial.github.io/patterns/print.html"
-file_name="rust_design_patterns.pdf"
-
-[Books.LearnWithLinkedList]
-print_url="https://rust-unofficial.github.io/too-many-lists/print.html"
-file_name="rust_linked_list.pdf"
-
-
-[Books.RustPractiseQuestions]
-print_url="https://rust-unofficial.github.io/rust-practise-questions/print.html"
-file_name="rust_practise_questions.pdf"
-
-[Books.The_Rust_Discovery-microbit]
-print_url="https://docs.rust-embedded.org/discovery/microbit/print.html"
-file_name="microbit_beginner_rust.pdf"
-
-[Books.The_Rust_DiscoverySTM]
-print_url="https://docs.rust-embedded.org/discovery/f3discovery/print.html"
-file_name="stm32f3discovery_beginner_rust.pdf"
-
-[Books.CargoBook]
-print_url="https://doc.rust-lang.org/cargo/print.html"
-file_name="cargo_book.pdf"
-
-[Books.EditionGuide]
-print_url="https://doc.rust-lang.org/edition-guide/print.html"
-file_name="edition_guide.pdf"
-
-[Books.RustcBook]
-print_url="https://doc.rust-lang.org/rustc/print.html"
-file_name="rustc_book.pdf"
-
-[Books.RustdocBook]
-print_url="https://doc.rust-lang.org/stable/rustdoc/print.html"
-file_name="rustdoc_book.pdf"
-
-[Books.RustupBook]
-print_url="https://rust-lang.github.io/rustup/print.html"
-file_name="rustup_book.pdf"
-
-[Books.UnstableBook]
-print_url="https://doc.rust-lang.org/unstable-book/print.html"
-file_name="unstable_book.pdf"
-
-[Books.RustRFCs]
-print_url="https://rust-lang.github.io/rfcs/print.html"
-file_name="rust_rfcs.pdf"
-display_title="Rust RFCs"
-
-[Books.RustAPIGuidelines]
-print_url="https://rust-lang.github.io/api-guidelines/print.html"
-file_name="rust_api_guidelines.pdf"
-
-[Books.RustcDevGuide]
-print_url="https://rustc-dev-guide.rust-lang.org/print.html"
-file_name="rustc_dev_guide.pdf"
-
-[Books.AsyncProgramming]
-print_url="https://rust-lang.github.io/async-book/print.html"
-file_name="async_programming.pdf"
-
-[Books.UnsafeCodeGuidelines]
-print_url="https://rust-lang.github.io/unsafe-code-guidelines/print.html"
-file_name="unsafe_code_guidelines.pdf"
+print_url = "https://doc.rust-lang.org/rust-by-example/print.html"
+file_name = "rust_by_example.pdf"
+category = "Learn Rust"
 
 [Books.ComprehensiveRust]
-print_url="https://google.github.io/comprehensive-rust/print.html"
-file_name="comprehensive_rust.pdf"
+print_url = "https://google.github.io/comprehensive-rust/print.html"
+file_name = "comprehensive_rust.pdf"
+category = "Learn Rust"
+
+[Books.EasyRust]
+print_url = "https://dhghomon.github.io/easy_rust/print.html"
+file_name = "easy_rust.pdf"
+category = "Learn Rust"
 
 [Books.EffectiveRust]
-print_url="https://www.lurklurk.org/effective-rust/print.html"
-file_name="effective_rust.pdf"
+print_url = "https://www.lurklurk.org/effective-rust/print.html"
+file_name = "effective_rust.pdf"
+category = "Learn Rust"
 
-[Books.LittleBookOfRustMacros]
-print_url="https://veykril.github.io/tlborm/print.html"
-file_name="rust_macros.pdf"
+[Books.Rust_Cookbook]
+print_url = "https://rust-lang-nursery.github.io/rust-cookbook/print.html"
+file_name = "cookbook.pdf"
+category = "Learn Rust"
 
-[Books.Embedonomicon]
-print_url="https://docs.rust-embedded.org/embedonomicon/print.html"
-file_name="embedonomicon.pdf"
+[Books.RustForDotnetDevs]
+print_url = "https://microsoft.github.io/rust-for-dotnet-devs/latest/print.html"
+file_name = "rust_for_dotnet_devs.pdf"
+display_title = "Rust for .NET Developers"
+category = "Learn Rust"
 
-[Books.WasmBindgenGuide]
-print_url="https://rustwasm.github.io/docs/wasm-bindgen/print.html"
-file_name="wasm_bindgen_guide.pdf"
+[Books.GentleIntroToRust]
+print_url = "https://stevedonovan.github.io/rust-gentle-intro/print.html"
+file_name = "gentle_intro_to_rust.pdf"
+display_title = "A Gentle Introduction To Rust"
+category = "Learn Rust"
+
+[Books.RustForPolyglotProgrammer]
+print_url = "https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/print.html"
+file_name = "rust_for_polyglot_programmer.pdf"
+display_title = "Rust For The Polyglot Programmer"
+category = "Learn Rust"
+
+[Books.Py2rs]
+print_url = "https://rochacbruno.github.io/py2rs/print.html"
+file_name = "py2rs.pdf"
+display_title = "py2rs: From Python Into Rust"
+category = "Learn Rust"
+
+# ------------------------------------------------------------------
+# Practice & Projects
+# ------------------------------------------------------------------
+
+[Books.HundredExercises]
+print_url = "https://rust-exercises.com/100-exercises/print.html"
+file_name = "rust_100_exercises.pdf"
+display_title = "100 Exercises To Learn Rust"
+category = "Practice & Projects"
+
+[Books.RustPractiseQuestions]
+print_url = "https://rust-unofficial.github.io/rust-practise-questions/print.html"
+file_name = "rust_practise_questions.pdf"
+category = "Practice & Projects"
+
+[Books.LearnWithLinkedList]
+print_url = "https://rust-unofficial.github.io/too-many-lists/print.html"
+file_name = "rust_linked_list.pdf"
+category = "Practice & Projects"
 
 [Books.LifetimeKata]
-print_url="https://tfpk.github.io/lifetimekata/print.html"
-file_name="lifetime_kata.pdf"
+print_url = "https://tfpk.github.io/lifetimekata/print.html"
+file_name = "lifetime_kata.pdf"
+category = "Practice & Projects"
+
+[Books.MacroKata]
+print_url = "https://tfpk.github.io/macrokata/print.html"
+file_name = "macro_kata.pdf"
+category = "Practice & Projects"
+
+[Books.PNGme]
+print_url = "https://jrdngr.github.io/pngme_book/print.html"
+file_name = "pngme.pdf"
+display_title = "PNGme"
+category = "Practice & Projects"
+
+[Books.RustCLI]
+print_url = "https://rust-cli.github.io/book/print.html"
+file_name = "rust_cli.pdf"
+display_title = "Rust CLI"
+category = "Practice & Projects"
+
+[Books.BevyCheatbook]
+print_url = "https://bevy-cheatbook.github.io/print.html"
+file_name = "bevy_cheatbook.pdf"
+display_title = "Unofficial Bevy Cheat Book"
+category = "Practice & Projects"
+
+[Books.RoguelikeTutorialInRust]
+print_url = "https://bfnightly.bracketproductions.com/print.html"
+file_name = "roguelike_tutorial.pdf"
+category = "Practice & Projects"
+
+[Books.WritingInterpretersInRust]
+print_url = "https://rust-hosted-langs.github.io/book/print.html"
+file_name = "writing_interpreters_in_rust.pdf"
+category = "Practice & Projects"
+
+[Books.Nominomicon]
+print_url = "https://tfpk.github.io/nominomicon/print.html"
+file_name = "nominomicon.pdf"
+category = "Practice & Projects"
+
+[Books.NESEmulatorInRust]
+print_url = "https://bugzmanov.github.io/nes_ebook/print.html"
+file_name = "nes_emulator_in_rust.pdf"
+display_title = "Writing NES Emulator In Rust"
+category = "Practice & Projects"
+
+[Books.RustSokoban]
+print_url = "https://sokoban.iolivia.me/print.html"
+file_name = "rust_sokoban.pdf"
+category = "Practice & Projects"
+
+[Books.BuildLuaInRust]
+print_url = "https://wubingzheng.github.io/build-lua-in-rust/en/print.html"
+file_name = "build_lua_in_rust.pdf"
+display_title = "Build A Lua Interpreter In Rust"
+category = "Practice & Projects"
+
+[Books.Gtk4Book]
+print_url = "https://gtk-rs.org/gtk4-rs/stable/latest/book/print.html"
+file_name = "gui_development_with_gtk4.pdf"
+display_title = "GUI Development With GTK 4"
+category = "Practice & Projects"
+
+[Books.MacroquadBook]
+print_url = "https://mq.agical.se/print.html"
+file_name = "game_dev_with_macroquad.pdf"
+display_title = "Game Development With Macroquad"
+category = "Practice & Projects"
+
+# ------------------------------------------------------------------
+# Advanced
+# ------------------------------------------------------------------
+
+[Books.Nomicon]
+print_url = "https://doc.rust-lang.org/nomicon/print.html"
+file_name = "nomicon.pdf"
+category = "Advanced"
+
+[Books.AsyncProgramming]
+print_url = "https://rust-lang.github.io/async-book/print.html"
+file_name = "async_programming.pdf"
+category = "Advanced"
+
+[Books.RustPerformanceBook]
+print_url = "https://nnethercote.github.io/perf-book/print.html"
+file_name = "rust_performance.pdf"
+category = "Advanced"
+
+[Books.RustDesignPatterns]
+print_url = "https://rust-unofficial.github.io/patterns/print.html"
+file_name = "rust_design_patterns.pdf"
+category = "Advanced"
+
+[Books.LittleBookOfRustMacros]
+print_url = "https://veykril.github.io/tlborm/print.html"
+file_name = "rust_macros.pdf"
+category = "Advanced"
+
+[Books.RustErrorDocs]
+print_url = "https://nrc.github.io/error-docs/print.html"
+file_name = "rust_error_handling.pdf"
+display_title = "Error Handling In Rust"
+category = "Advanced"
+
+[Books.High_Assurance_Rust]
+print_url = "https://highassurance.rs/print.html"
+file_name = "high_assurance_rust.pdf"
+category = "Advanced"
+
+[Books.SecureRustGuidelines]
+print_url = "https://anssi-fr.github.io/rust-guide/print.html"
+file_name = "secure_rust_guidelines.pdf"
+category = "Advanced"
+
+[Books.UnsafeCodeGuidelines]
+print_url = "https://rust-lang.github.io/unsafe-code-guidelines/print.html"
+file_name = "unsafe_code_guidelines.pdf"
+category = "Advanced"
+
+[Books.RustFuzzBook]
+print_url = "https://rust-fuzz.github.io/book/print.html"
+file_name = "rust_fuzz.pdf"
+category = "Advanced"
+
+[Books.RustRandBook]
+print_url = "https://rust-random.github.io/book/print.html"
+file_name = "rust_rand_book.pdf"
+display_title = "The Rust Rand Book"
+category = "Advanced"
+
+[Books.KaniBook]
+print_url = "https://model-checking.github.io/kani/print.html"
+file_name = "kani_book.pdf"
+display_title = "The Kani Book"
+category = "Advanced"
+
+[Books.QuinedotRustLearning]
+print_url = "https://quinedot.github.io/rust-learning/print.html"
+file_name = "quinedot_rust_learning.pdf"
+display_title = "Learning Rust (Quinedot)"
+category = "Advanced"
+
+[Books.ParallelRustCpp]
+print_url = "https://parallel-rust-cpp.github.io/print.html"
+file_name = "parallel_rust_cpp.pdf"
+display_title = "Comparing Parallel Rust And C++"
+category = "Advanced"
+
+# ------------------------------------------------------------------
+# Embedded
+# ------------------------------------------------------------------
+
+[Books.EmbeddedRust]
+print_url = "https://docs.rust-embedded.org/book/print.html"
+file_name = "embedded_rust_book.pdf"
+category = "Embedded"
+
+[Books.The_Rust_Discovery-microbit]
+print_url = "https://docs.rust-embedded.org/discovery/microbit/print.html"
+file_name = "microbit_beginner_rust.pdf"
+category = "Embedded"
+
+[Books.The_Rust_DiscoverySTM]
+print_url = "https://docs.rust-embedded.org/discovery/f3discovery/print.html"
+file_name = "stm32f3discovery_beginner_rust.pdf"
+category = "Embedded"
+
+[Books.Embedonomicon]
+print_url = "https://docs.rust-embedded.org/embedonomicon/print.html"
+file_name = "embedonomicon.pdf"
+category = "Embedded"
+
+[Books.RustOnESP]
+print_url = "https://docs.espressif.com/projects/rust/book/print.html"
+file_name = "rust_on_esp.pdf"
+display_title = "Rust on ESP"
+category = "Embedded"
+
+[Books.RTICBook]
+print_url = "https://rtic.rs/2/book/en/print.html"
+file_name = "rtic_book.pdf"
+display_title = "RTIC (Real-Time Interrupt-driven Concurrency)"
+category = "Embedded"
+
+[Books.EmbeddedRustOnEspressif]
+print_url = "https://esp-rs.github.io/std-training/print.html"
+file_name = "embedded_rust_on_espressif.pdf"
+category = "Embedded"
+
+[Books.FerrousEmbeddedTraining]
+print_url = "https://embedded-trainings.ferrous-systems.com/print.html"
+file_name = "ferrous_embedded_training.pdf"
+display_title = "Embedded Training (Ferrous Systems)"
+category = "Embedded"
+
+# ------------------------------------------------------------------
+# WebAssembly
+# ------------------------------------------------------------------
+
+[Books.RustWasm]
+print_url = "https://rustwasm.github.io/docs/book/print.html"
+file_name = "rust_wasm.pdf"
+category = "WebAssembly"
+
+[Books.WasmBindgenGuide]
+print_url = "https://rustwasm.github.io/docs/wasm-bindgen/print.html"
+file_name = "wasm_bindgen_guide.pdf"
+category = "WebAssembly"
+
+[Books.WasmPack]
+print_url = "https://rustwasm.github.io/docs/wasm-pack/print.html"
+file_name = "wasm_pack.pdf"
+display_title = "wasm-pack"
+category = "WebAssembly"
+
+[Books.WasmtimeGuide]
+print_url = "https://docs.wasmtime.dev/print.html"
+file_name = "wasmtime_guide.pdf"
+display_title = "Wasmtime Documentation"
+category = "WebAssembly"
+
+# ------------------------------------------------------------------
+# Reference & Tooling
+# ------------------------------------------------------------------
+
+[Books.RustReference]
+print_url = "https://doc.rust-lang.org/reference/print.html"
+file_name = "rust_reference.pdf"
+category = "Reference & Tooling"
+
+[Books.CargoBook]
+print_url = "https://doc.rust-lang.org/cargo/print.html"
+file_name = "cargo_book.pdf"
+category = "Reference & Tooling"
+
+[Books.RustcBook]
+print_url = "https://doc.rust-lang.org/rustc/print.html"
+file_name = "rustc_book.pdf"
+category = "Reference & Tooling"
+
+[Books.RustdocBook]
+print_url = "https://doc.rust-lang.org/stable/rustdoc/print.html"
+file_name = "rustdoc_book.pdf"
+category = "Reference & Tooling"
+
+[Books.RustupBook]
+print_url = "https://rust-lang.github.io/rustup/print.html"
+file_name = "rustup_book.pdf"
+category = "Reference & Tooling"
+
+[Books.ClippyBook]
+print_url = "https://doc.rust-lang.org/clippy/print.html"
+file_name = "clippy_book.pdf"
+display_title = "Clippy Documentation"
+category = "Reference & Tooling"
+
+[Books.EditionGuide]
+print_url = "https://doc.rust-lang.org/edition-guide/print.html"
+file_name = "edition_guide.pdf"
+category = "Reference & Tooling"
+
+[Books.UnstableBook]
+print_url = "https://doc.rust-lang.org/unstable-book/print.html"
+file_name = "unstable_book.pdf"
+category = "Reference & Tooling"
+
+[Books.StyleGuide]
+print_url = "https://doc.rust-lang.org/style-guide/print.html"
+file_name = "rust_style_guide.pdf"
+display_title = "Rust Style Guide"
+category = "Reference & Tooling"
+
+[Books.RustAPIGuidelines]
+print_url = "https://rust-lang.github.io/api-guidelines/print.html"
+file_name = "rust_api_guidelines.pdf"
+category = "Reference & Tooling"
+
+[Books.RustRFCs]
+print_url = "https://rust-lang.github.io/rfcs/print.html"
+file_name = "rust_rfcs.pdf"
+display_title = "Rust RFCs"
+category = "Reference & Tooling"
+
+[Books.RustcDevGuide]
+print_url = "https://rustc-dev-guide.rust-lang.org/print.html"
+file_name = "rustc_dev_guide.pdf"
+category = "Reference & Tooling"
+
+[Books.MdBookGuide]
+print_url = "https://rust-lang.github.io/mdBook/print.html"
+file_name = "mdbook_guide.pdf"
+display_title = "mdBook Documentation"
+category = "Reference & Tooling"
+
+[Books.RustBindgen]
+print_url = "https://rust-lang.github.io/rust-bindgen/print.html"
+file_name = "rust_bindgen.pdf"
+display_title = "bindgen User Guide"
+category = "Reference & Tooling"
+
+[Books.ErrorCodesIndex]
+print_url = "https://doc.rust-lang.org/error_codes/print.html"
+file_name = "rust_error_codes_index.pdf"
+display_title = "Rust Error Codes Index"
+category = "Reference & Tooling"
+
+[Books.RustAnalyzerBook]
+print_url = "https://rust-analyzer.github.io/book/print.html"
+file_name = "rust_analyzer_book.pdf"
+display_title = "rust-analyzer Manual"
+category = "Reference & Tooling"
+
+[Books.StdDevGuide]
+print_url = "https://std-dev-guide.rust-lang.org/print.html"
+file_name = "std_dev_guide.pdf"
+display_title = "Standard Library Developers Guide"
+category = "Reference & Tooling"
